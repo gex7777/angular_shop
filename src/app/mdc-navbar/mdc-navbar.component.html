@@ -1,0 +1,72 @@
+<mdc-top-app-bar
+  class="demo-top-app-bar"
+  #topAppBar
+  fixed
+  dense
+  style="z-index: 7; left: 0px;"
+>
+  <mdc-top-app-bar-row>
+    <mdc-top-app-bar-section align="start" title="Angular MDC">
+      <button mdcTopAppBarNavIcon (click)="appDrawer.open = !appDrawer.open">
+        <mdc-icon>menu</mdc-icon>
+      </button>
+    </mdc-top-app-bar-section>
+    <mdc-top-app-bar-section align="end">
+      <button
+        mdc-button
+        #demoAnchor
+        mdcTopAppBarNavIcon
+        (click)="demo.open = !demo.open"
+      >
+        <mdc-icon>
+          account_circle
+        </mdc-icon>
+      </button>
+      <mdc-menu #demo [anchorElement]="demoAnchor" [anchorMargin]="{ top: 35 }">
+        <mdc-list>
+          <mdc-list-item routerLink="my-orders">My Orders</mdc-list-item>
+          <mdc-list-item routerLink="admin/orders">Manage Orders</mdc-list-item>
+          <mdc-list-item routerLink="admin/products"
+            >Manage Products</mdc-list-item
+          >
+          <mdc-list-item routerLink="">Logout</mdc-list-item>
+        </mdc-list>
+      </mdc-menu>
+    </mdc-top-app-bar-section>
+  </mdc-top-app-bar-row>
+</mdc-top-app-bar>
+
+<div class="demo-panel">
+  <mdc-drawer
+    style="top: 44px; position: fixed;"
+    #appDrawer="mdcDrawer"
+    [open]="!isScreenSmall()"
+    [drawer]="isScreenSmall() ? 'modal' : 'dismissible'"
+  >
+    <mdc-drawer-content>
+      <mdc-list>
+        <mdc-list-item
+          routerLink=""
+          [activated]="rlaHome.isActive"
+          (selectionChange)="onDrawerSelect('')"
+          routerLinkActive
+          #rlaHome="routerLinkActive"
+          cdkFocusInitial
+          >Home</mdc-list-item
+        >
+        <mdc-list-item
+          routerLink="products"
+          [activated]="rlaGS.isActive"
+          (selectionChange)="onDrawerSelect('products')"
+          routerLinkActive
+          #rlaGS="routerLinkActive"
+          cdkFocusInitial
+          >Products</mdc-list-item
+        >
+        <mdc-list-divider></mdc-list-divider> </mdc-list></mdc-drawer-content
+  ></mdc-drawer>
+
+  <div mdcDrawerAppContent class="demo-panel-section">
+    <router-outlet></router-outlet>
+  </div>
+</div>
