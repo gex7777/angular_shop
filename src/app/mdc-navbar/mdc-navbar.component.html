@@ -12,26 +12,38 @@
       </button>
     </mdc-top-app-bar-section>
     <mdc-top-app-bar-section align="end">
-      <button
-        mdc-button
-        #demoAnchor
-        mdcTopAppBarNavIcon
-        (click)="demo.open = !demo.open"
-      >
-        <mdc-icon>
-          account_circle
-        </mdc-icon>
+      <div *ngIf="user">
+        <button
+          #demoAnchor
+          mdcTopAppBarNavIcon
+          (click)="demo.open = !demo.open"
+        >
+          <mdc-icon>
+            account_circle
+          </mdc-icon>
+        </button>
+        <mdc-menu
+          #demo
+          [anchorElement]="demoAnchor"
+          [anchorMargin]="{ top: 35 }"
+        >
+          <mdc-list>
+            <mdc-list-item routerLink="my-orders">My Orders</mdc-list-item>
+            <mdc-list-item routerLink="admin/orders"
+              >Manage Orders</mdc-list-item
+            >
+            <mdc-list-item routerLink="admin/products"
+              >Manage Products</mdc-list-item
+            >
+            <mdc-list-item (click)="logout()" routerLink=""
+              >Logout</mdc-list-item
+            >
+          </mdc-list>
+        </mdc-menu>
+      </div>
+      <button mdc-button *ngIf="!user" dense raised routerLink="login">
+        Login
       </button>
-      <mdc-menu #demo [anchorElement]="demoAnchor" [anchorMargin]="{ top: 35 }">
-        <mdc-list>
-          <mdc-list-item routerLink="my-orders">My Orders</mdc-list-item>
-          <mdc-list-item routerLink="admin/orders">Manage Orders</mdc-list-item>
-          <mdc-list-item routerLink="admin/products"
-            >Manage Products</mdc-list-item
-          >
-          <mdc-list-item routerLink="">Logout</mdc-list-item>
-        </mdc-list>
-      </mdc-menu>
     </mdc-top-app-bar-section>
   </mdc-top-app-bar-row>
 </mdc-top-app-bar>

@@ -13,7 +13,8 @@ import {
   MdcIconModule,
   MdcListModule,
   MdcMenuModule,
-  MdcDrawerModule
+  MdcDrawerModule,
+  MdcButtonModule
 } from "@angular-mdc/web";
 
 import { MdcNavbarComponent } from "./mdc-navbar/mdc-navbar.component";
@@ -49,6 +50,7 @@ import { AdminOrdersComponent } from "./admin/admin-orders/admin-orders.componen
     MdcIconModule,
     MdcListModule,
     MdcMenuModule,
+    MdcButtonModule,
     MdcDrawerModule,
     RouterModule.forRoot([
       { path: "", component: HomeComponent },
