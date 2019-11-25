@@ -1,3 +1,6 @@
+import { UserService } from "./user.service";
+import { AuthGuardService } from "./auth-guard.service";
+import { AuthService } from "./auth.service";
 import { LoginComponent } from "./login/login.component";
 import { Router, RouterModule } from "@angular/router";
 import { environment } from "./../environments/environment";
@@ -56,15 +59,36 @@ import { AdminOrdersComponent } from "./admin/admin-orders/admin-orders.componen
       { path: "", component: HomeComponent },
       { path: "products", component: ProductsComponent },
       { path: "shopping-cart", component: ShoppingCartComponent },
-      { path: "check-out", component: CheckOutComponent },
-      { path: "order-success", component: OrderSuccessComponent },
       { path: "login", component: LoginComponent },
-      { path: "admin/products", component: AdminProductsComponent },
-      { path: "admin/orders", component: AdminOrdersComponent },
-      { path: "my-orders", component: MyOrdersComponent }
+      {
+        path: "check-out",
+        component: CheckOutComponent,
+        canActivate: [AuthGuardService]
+      },
+      {
+        path: "order-success",
+        component: OrderSuccessComponent,
+        canActivate: [AuthGuardService]
+      },
+
+      {
+        path: "admin/products",
+        component: AdminProductsComponent,
+        canActivate: [AuthGuardService]
+      },
+      {
+        path: "admin/orders",
+        component: AdminOrdersComponent,
+        canActivate: [AuthGuardService]
+      },
+      {
+        path: "my-orders",
+        component: MyOrdersComponent,
+        canActivate: [AuthGuardService]
+      }
     ])
   ],
-  providers: [],
+  providers: [AuthService, AuthGuardService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

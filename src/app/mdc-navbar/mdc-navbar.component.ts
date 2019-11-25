@@ -1,8 +1,7 @@
-import { AngularFireAuth } from "@angular/fire/auth";
+import { AuthService } from "./../auth.service";
 import { Component, OnInit, NgZone, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { MdcDrawer, MdcTopAppBar, MdcMenu } from "@angular-mdc/web";
-import * as firebase from "firebase";
 const SMALL_WIDTH_BREAKPOINT = 1240;
 @Component({
   selector: "mdc-navbar",
@@ -13,14 +12,12 @@ export class MdcNavbarComponent implements OnInit {
   matcher: MediaQueryList;
   @ViewChild("topAppBar", { static: false }) topAppBar: MdcTopAppBar;
   @ViewChild("appDrawer", { static: false }) appDrawer: MdcDrawer;
-  user: firebase.User;
+
   constructor(
     private _router: Router,
     private _ngZone: NgZone,
-    private afAuth: AngularFireAuth
-  ) {
-    afAuth.authState.subscribe(user => (this.user = user));
-  }
+    public auth: AuthService
+  ) {}
 
   isScreenSmall(): boolean {
     return this.matcher.matches;
@@ -29,7 +26,7 @@ export class MdcNavbarComponent implements OnInit {
     this.matcher = matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`);
   }
   logout() {
-    this.afAuth.auth.signOut();
+    this.auth.logout();
   }
   onDrawerSelect(route?: string) {
     if (route) {
