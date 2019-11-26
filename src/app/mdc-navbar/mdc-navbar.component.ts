@@ -1,3 +1,4 @@
+import { AppUser } from "./../models/app-user";
 import { AuthService } from "./../auth.service";
 import { Component, OnInit, NgZone, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
@@ -10,14 +11,17 @@ const SMALL_WIDTH_BREAKPOINT = 1240;
 })
 export class MdcNavbarComponent implements OnInit {
   matcher: MediaQueryList;
+  appUser: AppUser;
   @ViewChild("topAppBar", { static: false }) topAppBar: MdcTopAppBar;
   @ViewChild("appDrawer", { static: false }) appDrawer: MdcDrawer;
 
   constructor(
     private _router: Router,
     private _ngZone: NgZone,
-    public auth: AuthService
-  ) {}
+    private auth: AuthService
+  ) {
+    auth.AppUser$.subscribe(appUser => (this.appUser = appUser));
+  }
 
   isScreenSmall(): boolean {
     return this.matcher.matches;

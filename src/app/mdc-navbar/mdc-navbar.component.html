@@ -12,8 +12,8 @@
       </button>
     </mdc-top-app-bar-section>
     <mdc-top-app-bar-section align="end">
-      <div *ngIf="auth.user$ | async as user; else anon">
-        <span>{{ user.displayName }}</span>
+      <div *ngIf="appUser; else anon">
+        <span>{{ appUser.name }}</span>
         <button
           #demoAnchor
           mdcTopAppBarNavIcon
@@ -30,12 +30,14 @@
         >
           <mdc-list>
             <mdc-list-item routerLink="my-orders">My Orders</mdc-list-item>
-            <mdc-list-item routerLink="admin/orders"
-              >Manage Orders</mdc-list-item
-            >
-            <mdc-list-item routerLink="admin/products"
-              >Manage Products</mdc-list-item
-            >
+            <ng-container *ngIf="appUser.isAdmin">
+              <mdc-list-item routerLink="admin/orders"
+                >Manage Orders</mdc-list-item
+              >
+              <mdc-list-item routerLink="admin/products"
+                >Manage Products</mdc-list-item
+              >
+            </ng-container>
             <mdc-list-item (click)="logout()" routerLink=""
               >Logout</mdc-list-item
             >
