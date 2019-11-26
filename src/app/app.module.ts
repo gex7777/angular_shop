@@ -1,3 +1,5 @@
+import { MatTableModule } from "@angular/material/table";
+import { MatSortModule } from "@angular/material/sort";
 import { AdminAuthGuardService } from "./admin-auth-guard.service";
 import { UserService } from "./user.service";
 import { AuthGuardService } from "./auth-guard.service";
@@ -30,7 +32,8 @@ import { OrderSuccessComponent } from "./order-success/order-success.component";
 import { MyOrdersComponent } from "./my-orders/my-orders.component";
 import { AdminProductsComponent } from "./admin/admin-products/admin-products.component";
 import { AdminOrdersComponent } from "./admin/admin-orders/admin-orders.component";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ProductFormComponent } from "./admin/product-form/product-form.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +46,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MyOrdersComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
-    LoginComponent
+    LoginComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
@@ -79,6 +83,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         canActivate: [AuthGuardService, AdminAuthGuardService]
       },
       {
+        path: "admin/products/new",
+        component: ProductFormComponent,
+        canActivate: [AuthGuardService, AdminAuthGuardService]
+      },
+      {
         path: "admin/orders",
         component: AdminOrdersComponent,
         canActivate: [AuthGuardService, AdminAuthGuardService]
@@ -89,7 +98,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         canActivate: [AuthGuardService]
       }
     ]),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSortModule,
+    MatTableModule
   ],
   providers: [
     AuthService,
