@@ -29,6 +29,7 @@ import {
   MdcButtonModule,
   MdcElevationModule
 } from "@angular-mdc/web";
+import { CustomFormsModule } from "ng2-validation";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MdcNavbarComponent } from "./mdc-navbar/mdc-navbar.component";
 import { HomeComponent } from "./home/home.component";
@@ -113,7 +114,8 @@ import { FormsModule } from "@angular/forms";
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    CustomFormsModule
   ],
   providers: [
     AuthService,

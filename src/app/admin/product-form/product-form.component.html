@@ -1,42 +1,75 @@
 <form class="formies" #f="ngForm" (ngSubmit)="save(f.value)">
-  <mat-form-field appearance="outline">
+  <mat-form-field>
     <mat-label>title</mat-label>
-    <input ngModel name="title" id="title" matInput placeholder="title"
-  /></mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>price</mat-label>
+    <input
+      ngModel
+      required
+      #title="ngModel"
+      name="title"
+      id="title"
+      matInput
+      placeholder="title"
+    />
+    <mat-error *ngIf="title.touched && title.invalid">
+      Title is required.
+    </mat-error></mat-form-field
+  >
+  <mat-form-field>
     <span matPrefix>₹&nbsp;</span>
     <span matSuffix>.00</span>
+    <mat-label>price</mat-label>
 
-    <textarea
+    <input
       ngModel
+      required
+      #price="ngModel"
       name="price"
       id="price"
-      type="number"
       matInput
-      placeholder="Price"
-    ></textarea>
+      placeholder="price"
+    />
+    <mat-error *ngIf="price.touched && price.invalid">
+      <div *ngIf="price.errors.required">Price is required</div>
+      <div *ngIf="price.errors.min">Enter price higher than or equal to 0</div>
+    </mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="outline">
+  <mat-form-field>
+    <mat-error *ngIf="category.touched && category.invalid">
+      category is required.
+    </mat-error>
     <mat-label>category</mat-label>
-    <mat-select ngModel name="category" id="category" placeholder="category">
+    <mat-select
+      ngModel
+      required
+      #category="ngModel"
+      name="category"
+      id="category"
+      placeholder="category"
+    >
       <mat-option value=""></mat-option>
       <mat-option *ngFor="let c of categories$ | async" value="{{ c.name }}">{{
         c.name
       }}</mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field appearance="outline">
+  <mat-form-field>
     <mat-label>Image-URL</mat-label>
     <textarea
       ngModel
+      required
+      #imageURL="ngModel"
       name="imageURL"
       id="imageurl"
       type="text"
       matInput
       placeholder="Image-URL"
-    ></textarea>
+      url
+    ></textarea
+    ><mat-error *ngIf="imageURL.touched && imageURL.invalid">
+      <div *ngIf="imageURL.errors.required">Url is required.</div>
+      <div *ngIf="imageURL.errors.url">enter valid Url.</div>
+    </mat-error>
   </mat-form-field>
   <button mdc-button>Save</button>
 </form>
