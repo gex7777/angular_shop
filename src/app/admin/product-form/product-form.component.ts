@@ -1,3 +1,5 @@
+import { ProductService } from "./../../product.service";
+import { CategoryService } from "./../../category.service";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
@@ -28,7 +30,13 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ["./product-form.component.scss"]
 })
 export class ProductFormComponent implements OnInit {
-  constructor() {}
+  categories$;
+  constructor(
+    categoryService: CategoryService,
+    private productService: ProductService
+  ) {
+    this.categories$ = categoryService.getCategories();
+  }
   displayedColumns: string[] = ["position", "name", "weight", "symbol"];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
@@ -36,5 +44,8 @@ export class ProductFormComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
+  }
+  save(product) {
+    this.productService.create(product);
   }
 }

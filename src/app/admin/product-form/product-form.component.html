@@ -1,4 +1,52 @@
-<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+<form class="formies" #f="ngForm" (ngSubmit)="save(f.value)">
+  <mat-form-field appearance="outline">
+    <mat-label>title</mat-label>
+    <input ngModel name="title" id="title" matInput placeholder="title"
+  /></mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>price</mat-label>
+    <span matPrefix>₹&nbsp;</span>
+    <span matSuffix>.00</span>
+
+    <textarea
+      ngModel
+      name="price"
+      id="price"
+      type="number"
+      matInput
+      placeholder="Price"
+    ></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>category</mat-label>
+    <mat-select ngModel name="category" id="category" placeholder="category">
+      <mat-option value=""></mat-option>
+      <mat-option *ngFor="let c of categories$ | async" value="{{ c.name }}">{{
+        c.name
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Image-URL</mat-label>
+    <textarea
+      ngModel
+      name="imageURL"
+      id="imageurl"
+      type="text"
+      matInput
+      placeholder="Image-URL"
+    ></textarea>
+  </mat-form-field>
+  <button mdc-button>Save</button>
+</form>
+<table
+  mat-table
+  [dataSource]="dataSource"
+  matSort
+  class="mat-elevation-z8"
+  [mdcElevation]="8"
+>
   <!-- Position Column -->
   <ng-container matColumnDef="position">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>

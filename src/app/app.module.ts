@@ -1,5 +1,11 @@
+import { ProductService } from "./product.service";
+import { CategoryService } from "./category.service";
 import { MatTableModule } from "@angular/material/table";
-import { MatSortModule } from "@angular/material/sort";
+import {
+  MatSortModule,
+  MatSelectModule,
+  MatInputModule
+} from "@angular/material";
 import { AdminAuthGuardService } from "./admin-auth-guard.service";
 import { UserService } from "./user.service";
 import { AuthGuardService } from "./auth-guard.service";
@@ -20,9 +26,10 @@ import {
   MdcListModule,
   MdcMenuModule,
   MdcDrawerModule,
-  MdcButtonModule
+  MdcButtonModule,
+  MdcElevationModule
 } from "@angular-mdc/web";
-
+import { MatFormFieldModule } from "@angular/material/form-field";
 import { MdcNavbarComponent } from "./mdc-navbar/mdc-navbar.component";
 import { HomeComponent } from "./home/home.component";
 import { ProductsComponent } from "./products/products.component";
@@ -34,6 +41,7 @@ import { AdminProductsComponent } from "./admin/admin-products/admin-products.co
 import { AdminOrdersComponent } from "./admin/admin-orders/admin-orders.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ProductFormComponent } from "./admin/product-form/product-form.component";
+import { FormsModule } from "@angular/forms";
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,6 +69,7 @@ import { ProductFormComponent } from "./admin/product-form/product-form.componen
     MdcMenuModule,
     MdcButtonModule,
     MdcDrawerModule,
+    MdcElevationModule,
     RouterModule.forRoot([
       { path: "", component: HomeComponent },
       { path: "products", component: ProductsComponent },
@@ -100,13 +109,19 @@ import { ProductFormComponent } from "./admin/product-form/product-form.componen
     ]),
     BrowserAnimationsModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    FormsModule
   ],
   providers: [
     AuthService,
     AuthGuardService,
     UserService,
-    AdminAuthGuardService
+    AdminAuthGuardService,
+    CategoryService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })
