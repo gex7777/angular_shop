@@ -4,7 +4,8 @@ import { MatTableModule } from "@angular/material/table";
 import {
   MatSortModule,
   MatSelectModule,
-  MatInputModule
+  MatInputModule,
+  MatGridListModule
 } from "@angular/material";
 import { AdminAuthGuardService } from "./admin-auth-guard.service";
 import { UserService } from "./user.service";
@@ -27,7 +28,10 @@ import {
   MdcMenuModule,
   MdcDrawerModule,
   MdcButtonModule,
-  MdcElevationModule
+  MdcElevationModule,
+  MdcCardModule,
+  MdcIconButtonModule,
+  MdcFabModule
 } from "@angular-mdc/web";
 import { CustomFormsModule } from "ng2-validation";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -71,6 +75,9 @@ import { FormsModule } from "@angular/forms";
     MdcButtonModule,
     MdcDrawerModule,
     MdcElevationModule,
+    MdcCardModule,
+    MdcIconButtonModule,
+    MdcFabModule,
     RouterModule.forRoot([
       { path: "", component: HomeComponent },
       { path: "products", component: ProductsComponent },
@@ -115,7 +122,8 @@ import { FormsModule } from "@angular/forms";
     MatSelectModule,
     MatInputModule,
     FormsModule,
-    CustomFormsModule
+    CustomFormsModule,
+    MatGridListModule
   ],
   providers: [
     AuthService,

@@ -1,109 +1,122 @@
-<form class="formies" #f="ngForm" (ngSubmit)="save(f.value)">
-  <mat-form-field>
-    <mat-label>title</mat-label>
-    <input
-      ngModel
-      required
-      #title="ngModel"
-      name="title"
-      id="title"
-      matInput
-      placeholder="title"
-    />
-    <mat-error *ngIf="title.touched && title.invalid">
-      Title is required.
-    </mat-error></mat-form-field
-  >
-  <mat-form-field>
-    <span matPrefix>₹&nbsp;</span>
-    <span matSuffix>.00</span>
-    <mat-label>price</mat-label>
+<div class="mdc-layout-grid">
+  <div class="mdc-layout-grid__inner">
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
+      <form
+        class="formies"
+        #f="ngForm"
+        (ngSubmit)="save(f.value)"
+        [mdcElevation]="4"
+      >
+        <mat-form-field>
+          <mat-label>title</mat-label>
+          <input
+            ngModel
+            required
+            #title="ngModel"
+            name="title"
+            id="title"
+            matInput
+            placeholder="title"
+          />
+          <mat-error *ngIf="title.touched && title.invalid">
+            Title is required.
+          </mat-error></mat-form-field
+        >
+        <mat-form-field>
+          <span matPrefix>₹&nbsp;</span>
+          <span matSuffix>.00</span>
+          <mat-label>price</mat-label>
 
-    <input
-      ngModel
-      required
-      #price="ngModel"
-      name="price"
-      id="price"
-      matInput
-      placeholder="price"
-    />
-    <mat-error *ngIf="price.touched && price.invalid">
-      <div *ngIf="price.errors.required">Price is required</div>
-      <div *ngIf="price.errors.min">Enter price higher than or equal to 0</div>
-    </mat-error>
-  </mat-form-field>
+          <input
+            ngModel
+            required
+            #price="ngModel"
+            name="price"
+            id="price"
+            matInput
+            placeholder="price"
+            [min]="0"
+          />
+          <mat-error *ngIf="price.touched && price.invalid">
+            <div *ngIf="price.errors.required">Price is required</div>
+            <div *ngIf="price.errors.min">
+              Enter price higher than or equal to 0
+            </div>
+          </mat-error>
+        </mat-form-field>
 
-  <mat-form-field>
-    <mat-error *ngIf="category.touched && category.invalid">
-      category is required.
-    </mat-error>
-    <mat-label>category</mat-label>
-    <mat-select
-      ngModel
-      required
-      #category="ngModel"
-      name="category"
-      id="category"
-      placeholder="category"
-    >
-      <mat-option value=""></mat-option>
-      <mat-option *ngFor="let c of categories$ | async" value="{{ c.name }}">{{
-        c.name
-      }}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Image-URL</mat-label>
-    <textarea
-      ngModel
-      required
-      #imageURL="ngModel"
-      name="imageURL"
-      id="imageurl"
-      type="text"
-      matInput
-      placeholder="Image-URL"
-      url
-    ></textarea
-    ><mat-error *ngIf="imageURL.touched && imageURL.invalid">
-      <div *ngIf="imageURL.errors.required">Url is required.</div>
-      <div *ngIf="imageURL.errors.url">enter valid Url.</div>
-    </mat-error>
-  </mat-form-field>
-  <button mdc-button>Save</button>
-</form>
-<table
-  mat-table
-  [dataSource]="dataSource"
-  matSort
-  class="mat-elevation-z8"
-  [mdcElevation]="8"
->
-  <!-- Position Column -->
-  <ng-container matColumnDef="position">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
-    <td mat-cell *matCellDef="let element">{{ element.position }}</td>
-  </ng-container>
+        <mat-form-field>
+          <mat-error *ngIf="category.touched && category.invalid">
+            category is required.
+          </mat-error>
+          <mat-label>category</mat-label>
+          <mat-select
+            ngModel
+            required
+            #category="ngModel"
+            name="category"
+            id="category"
+            placeholder="category"
+          >
+            <mat-option value=""></mat-option>
+            <mat-option
+              *ngFor="let c of categories$ | async"
+              value="{{ c.name }}"
+              >{{ c.name }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Image-URL</mat-label>
+          <textarea
+            ngModel
+            required
+            #imageURL="ngModel"
+            name="imageURL"
+            id="imageurl"
+            type="text"
+            matInput
+            placeholder="Image-URL"
+            url
+          ></textarea
+          ><mat-error *ngIf="imageURL.touched && imageURL.invalid">
+            <div *ngIf="imageURL.errors.required">Url is required.</div>
+            <div *ngIf="imageURL.errors.url">enter valid Url.</div>
+          </mat-error>
+        </mat-form-field>
+        <button mdc-button primary>Save</button>
+      </form>
+    </div>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-  </ng-container>
-
-  <!-- Weight Column -->
-  <ng-container matColumnDef="weight">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Weight</th>
-    <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
-  </ng-container>
-
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="symbol">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Symbol</th>
-    <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
+    <div class=" mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
+      <div class="mdc-card demo-card" [mdcElevation]="4">
+        <div
+          class="mdc-card__primary-action demo-card__primary-action"
+          tabindex="0"
+        >
+          <img
+            class="mdc-card__media mdc-card__media--16-9 demo-card__media"
+            [src]="imageURL.value"
+            alt=""
+            style="height: 100%; width: 100%; object-fit:cover"
+          />
+          <div class="demo-card__primary">
+            <h2
+              class="demo-card__title mdc-typography mdc-typography--headline6"
+            >
+              {{ title.value }}
+            </h2>
+            <h3
+              class="demo-card__subtitle mdc-typography mdc-typography--subtitle2"
+            >
+              {{ price.value | currency: "INR":true }}
+            </h3>
+          </div>
+          <div
+            class="demo-card__secondary mdc-typography mdc-typography--body2"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

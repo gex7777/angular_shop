@@ -8,11 +8,16 @@ table {
 th.mat-sort-header-sorted {
   color: black;
 }
-.formies {
-  display: flex;
-  flex-direction: column;
-}
 
 .formies > * {
-  width: 100%;
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+.demo-card__media--16-9 {
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
 }
