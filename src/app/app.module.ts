@@ -95,13 +95,18 @@ import { FormsModule } from "@angular/forms";
       },
 
       {
-        path: "admin/products",
-        component: AdminProductsComponent,
+        path: "admin/products/new",
+        component: ProductFormComponent,
         canActivate: [AuthGuardService, AdminAuthGuardService]
       },
       {
-        path: "admin/products/new",
+        path: "admin/products/:id",
         component: ProductFormComponent,
+        canActivate: [AuthGuardService, AdminAuthGuardService]
+      },
+      {
+        path: "admin/products",
+        component: AdminProductsComponent,
         canActivate: [AuthGuardService, AdminAuthGuardService]
       },
       {

@@ -10,7 +10,7 @@
         <mat-form-field>
           <mat-label>title</mat-label>
           <input
-            ngModel
+            [(ngModel)]="product.title"
             required
             #title="ngModel"
             name="title"
@@ -28,7 +28,7 @@
           <mat-label>price</mat-label>
 
           <input
-            ngModel
+            [(ngModel)]="product.price"
             required
             #price="ngModel"
             name="price"
@@ -51,7 +51,7 @@
           </mat-error>
           <mat-label>category</mat-label>
           <mat-select
-            ngModel
+            [(ngModel)]="product.category"
             required
             #category="ngModel"
             name="category"
@@ -69,7 +69,7 @@
         <mat-form-field>
           <mat-label>Image-URL</mat-label>
           <textarea
-            ngModel
+            [(ngModel)]="product.imageURL"
             required
             #imageURL="ngModel"
             name="imageURL"
@@ -96,20 +96,21 @@
         >
           <img
             class="mdc-card__media mdc-card__media--16-9 demo-card__media"
-            [src]="imageURL.value"
+            [src]="product.imageURL"
             alt=""
+            *ngIf="product.imageURL"
             style="height: 100%; width: 100%; object-fit:cover"
           />
           <div class="demo-card__primary">
             <h2
               class="demo-card__title mdc-typography mdc-typography--headline6"
             >
-              {{ title.value }}
+              {{ product.title }}
             </h2>
             <h3
               class="demo-card__subtitle mdc-typography mdc-typography--subtitle2"
             >
-              {{ price.value | currency: "INR":true }}
+              {{ product.price | currency: "INR":true }}
             </h3>
           </div>
           <div
