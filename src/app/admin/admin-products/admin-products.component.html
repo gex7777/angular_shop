@@ -1,7 +1,15 @@
 <p><a routerLink="/admin/products/new" mdc-button>new product</a></p>
+<mat-form-field>
+  <input
+    matInput
+    #query
+    (keyup)="applyFilter(query.value)"
+    placeholder="Filter"
+  />
+</mat-form-field>
 <table
   mat-table
-  [dataSource]="products$"
+  [dataSource]="dataSource"
   matSort
   [mdcElevation]="4"
   class="mat-elevation-z8"
@@ -10,7 +18,7 @@
   <ng-container matColumnDef="title">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
     <td mat-cell *matCellDef="let element">
-      {{ element.payload.val().title }}
+      {{ element.title }}
     </td>
   </ng-container>
 
@@ -18,7 +26,7 @@
   <ng-container matColumnDef="price">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
     <td mat-cell *matCellDef="let element">
-      {{ element.payload.val().price }}
+      {{ element.price }}
     </td>
   </ng-container>
 
@@ -26,10 +34,17 @@
   <ng-container matColumnDef="link">
     <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
     <td mat-cell *matCellDef="let element">
-      <a [routerLink]="['/admin/products/', element.key]">edit</a>
+      <a [routerLink]="['/admin/products/', element.$key]">edit</a>
     </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
+
+<mat-paginator
+  style="width: 70%;
+margin-left: 15%;
+margin-right: 15%;"
+  [pageSizeOptions]="[5, 10, 25, 100]"
+></mat-paginator>

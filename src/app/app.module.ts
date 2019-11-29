@@ -5,7 +5,8 @@ import {
   MatSortModule,
   MatSelectModule,
   MatInputModule,
-  MatGridListModule
+  MatGridListModule,
+  MatPaginatorModule
 } from "@angular/material";
 import { AdminAuthGuardService } from "./admin-auth-guard.service";
 import { UserService } from "./user.service";
@@ -126,6 +127,7 @@ import { FormsModule } from "@angular/forms";
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
+    MatPaginatorModule,
     FormsModule,
     CustomFormsModule,
     MatGridListModule

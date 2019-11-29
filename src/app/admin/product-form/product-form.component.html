@@ -69,19 +69,19 @@
         <mat-form-field>
           <mat-label>Image-URL</mat-label>
           <textarea
-            [(ngModel)]="product.imageURL"
+            [(ngModel)]="product.imageUrl"
             required
-            #imageURL="ngModel"
-            name="imageURL"
-            id="imageurl"
+            #imageUrl="ngModel"
+            name="imageUrl"
+            id="imageUrl"
             type="text"
             matInput
             placeholder="Image-URL"
             url
           ></textarea
-          ><mat-error *ngIf="imageURL.touched && imageURL.invalid">
-            <div *ngIf="imageURL.errors.required">Url is required.</div>
-            <div *ngIf="imageURL.errors.url">enter valid Url.</div>
+          ><mat-error *ngIf="imageUrl.touched && imageUrl.invalid">
+            <div *ngIf="imageUrl.errors.required">Url is required.</div>
+            <div *ngIf="imageUrl.errors.url">enter valid Url.</div>
           </mat-error>
         </mat-form-field>
         <button mdc-button primary>Save</button>
@@ -92,16 +92,16 @@
     </div>
 
     <div class=" mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
-      <div class="mdc-card demo-card" [mdcElevation]="4">
+      <div class="mdc-card demo-card" *ngIf="product.title" [mdcElevation]="4">
         <div
           class="mdc-card__primary-action demo-card__primary-action"
           tabindex="0"
         >
           <img
             class="mdc-card__media mdc-card__media--16-9 demo-card__media"
-            [src]="product.imageURL"
+            [src]="product.imageUrl"
             alt=""
-            *ngIf="product.imageURL"
+            *ngIf="product.imageUrl"
             style="height: 100%; width: 100%; object-fit:cover"
           />
           <div class="demo-card__primary">
