@@ -47,6 +47,7 @@ import { AdminProductsComponent } from "./admin/admin-products/admin-products.co
 import { AdminOrdersComponent } from "./admin/admin-orders/admin-orders.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ProductFormComponent } from "./admin/product-form/product-form.component";
+import { NgPipesModule } from "ngx-pipes";
 import { FormsModule } from "@angular/forms";
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { FormsModule } from "@angular/forms";
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     MdcTopAppBarModule,
+    NgPipesModule,
     MdcIconModule,
     MdcListModule,
     MdcMenuModule,

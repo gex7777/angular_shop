@@ -78,8 +78,25 @@
           routerLinkActive
           #rlaGS="routerLinkActive"
           cdkFocusInitial
-          >Products</mdc-list-item
+          >All Products</mdc-list-item
         >
+        <mdc-list-item
+          (selectionChange)="foundationVisible = !foundationVisible"
+        >
+          Categories
+          <mdc-icon mdcListItemMeta
+            >keyboard_arrow_{{ foundationVisible ? "down" : "right" }}</mdc-icon
+          >
+        </mdc-list-item>
+        <div *ngIf="foundationVisible">
+          <mdc-list-item
+            *ngFor="let item of products"
+            [routerLink]=""
+            [queryParams]="{ category: item.$key }"
+            (keyup)="callProduct(item.name)"
+            >{{ item.category | unique }}
+          </mdc-list-item>
+        </div>
         <mdc-list-divider></mdc-list-divider> </mdc-list></mdc-drawer-content
   ></mdc-drawer>
 
