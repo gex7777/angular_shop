@@ -91,8 +91,10 @@
         </mdc-list-item>
         <div *ngIf="foundationVisible">
           <a
+            (selectionChange)="onDrawerSelect('products')"
             class="mdc-list-item"
             *ngFor="let item of categories$"
+            (selectionChange)="onDrawerSelect('products')"
             routerLink="products/"
             [queryParams]="{ category: item.$key }"
             (click)="applyFilter(item.name)"

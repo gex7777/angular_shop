@@ -13,7 +13,7 @@ import {
   HostBinding,
   Input
 } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { MdcDrawer, MdcTopAppBar, MdcMenu } from "@angular-mdc/web";
 
 import { distinct } from "rxjs/operators";
@@ -33,11 +33,13 @@ export class MdcNavbarComponent implements OnInit {
 
   products: any = [];
   filteredProducts: any[];
+  category: string;
   constructor(
     private categoryService: CategoryService,
     private _router: Router,
     private productService: ProductService,
     private productShare: ProductShareService,
+    route: ActivatedRoute,
 
     private auth: AuthService
   ) {
@@ -61,6 +63,11 @@ export class MdcNavbarComponent implements OnInit {
           a["$key"] = item.key;
           this.products.push(a as Productsobj);
         });
+
+        route.queryParamMap.subscribe(params => {
+          this.category = params.get("category");
+          this.applyFilter(this.category);
+        });
       });
   }
   applyFilter(filterValue: string) {
@@ -69,7 +76,6 @@ export class MdcNavbarComponent implements OnInit {
           p.category.toLowerCase().includes(filterValue.toLowerCase())
         )
       : this.products;
-    console.log(this.filteredProducts);
 
     this.productShare.changeMessage(this.filteredProducts);
     this.ngOnInit();
@@ -80,8 +86,6 @@ export class MdcNavbarComponent implements OnInit {
   }
   ngOnInit() {
     this.matcher = matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`);
-
-    console.log(this.filteredProducts);
   }
   logout() {
     this.auth.logout();
