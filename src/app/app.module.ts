@@ -1,3 +1,4 @@
+import { ProductShareService } from "./product-share.service";
 import { ProductService } from "./product.service";
 import { CategoryService } from "./category.service";
 import { MatTableModule } from "@angular/material/table";
@@ -83,6 +84,7 @@ import { FormsModule } from "@angular/forms";
     MdcFabModule,
     RouterModule.forRoot([
       { path: "", component: HomeComponent },
+      { path: "", component: HomeComponent },
       { path: "products", component: ProductsComponent },
       { path: "shopping-cart", component: ShoppingCartComponent },
       { path: "login", component: LoginComponent },
@@ -140,7 +142,8 @@ import { FormsModule } from "@angular/forms";
     UserService,
     AdminAuthGuardService,
     CategoryService,
-    ProductService
+    ProductService,
+    ProductShareService
   ],
   bootstrap: [AppComponent]
 })

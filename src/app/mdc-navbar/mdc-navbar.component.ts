@@ -1,3 +1,4 @@
+import { ProductShareService } from "./../product-share.service";
 import { Productsobj } from "./../shared/productsobj";
 import { pipe } from "rxjs";
 import { ProductService } from "./../product.service";
@@ -28,17 +29,29 @@ export class MdcNavbarComponent implements OnInit {
 
   @ViewChild("topAppBar", { static: false }) topAppBar: MdcTopAppBar;
   @ViewChild("appDrawer", { static: false }) appDrawer: MdcDrawer;
-  categories$;
+  categories$: any = [];
 
   products: any = [];
+  filteredProducts: any[];
   constructor(
     private categoryService: CategoryService,
     private _router: Router,
     private productService: ProductService,
+    private productShare: ProductShareService,
 
     private auth: AuthService
   ) {
     auth.AppUser$.subscribe(appUser => (this.appUser = appUser));
+    this.categoryService
+      .getAll()
+      .snapshotChanges()
+      .subscribe(books => {
+        books.forEach(item => {
+          let a = item.payload.toJSON();
+          a["$key"] = item.key;
+          this.categories$.push(a as Productsobj);
+        });
+      });
     this.productService
       .getAll()
       .snapshotChanges()
@@ -49,9 +62,17 @@ export class MdcNavbarComponent implements OnInit {
           this.products.push(a as Productsobj);
         });
       });
-    this.categories$ = this.products.filter(
-      distinct((p: Productsobj) => p.category)
-    );
+  }
+  applyFilter(filterValue: string) {
+    this.filteredProducts = filterValue
+      ? this.products.filter(p =>
+          p.category.toLowerCase().includes(filterValue.toLowerCase())
+        )
+      : this.products;
+    console.log(this.filteredProducts);
+
+    this.productShare.changeMessage(this.filteredProducts);
+    this.ngOnInit();
   }
 
   isScreenSmall(): boolean {
@@ -59,6 +80,8 @@ export class MdcNavbarComponent implements OnInit {
   }
   ngOnInit() {
     this.matcher = matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`);
+
+    console.log(this.filteredProducts);
   }
   logout() {
     this.auth.logout();
