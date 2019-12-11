@@ -34,6 +34,7 @@ export class MdcNavbarComponent implements OnInit {
   products: any = [];
   filteredProducts: any[];
   category: string;
+
   constructor(
     private categoryService: CategoryService,
     private _router: Router,
@@ -44,6 +45,7 @@ export class MdcNavbarComponent implements OnInit {
     private auth: AuthService
   ) {
     auth.AppUser$.subscribe(appUser => (this.appUser = appUser));
+
     this.categoryService
       .getAll()
       .snapshotChanges()

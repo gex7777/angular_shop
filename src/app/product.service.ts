@@ -18,8 +18,7 @@ export class ProductService {
     return this.db.list("/products").push(product);
   }
   getAll() {
-    this.booksRef = this.db.list("/products");
-    return this.booksRef;
+    return this.db.list("/products");
   }
   get(productId) {
     return this.db.object("/products/" + productId);

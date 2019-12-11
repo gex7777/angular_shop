@@ -1,6 +1,6 @@
 import { ProductShareService } from "./../product-share.service";
 import { ProductService } from "./../product.service";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Productsobj } from "../shared/productsobj";
 import { ActivatedRoute } from "@angular/router";
 
@@ -9,16 +9,16 @@ import { ActivatedRoute } from "@angular/router";
   templateUrl: "./products.component.html",
   styleUrls: ["./products.component.scss"]
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnDestroy {
   products = [];
   category: any;
-
+  subscription: any;
   constructor(
     private productService: ProductService,
     private productShare: ProductShareService,
     route: ActivatedRoute
   ) {
-    this.productService
+    this.subscription = this.productService
       .getAll()
       .snapshotChanges()
       .subscribe(books => {
@@ -35,5 +35,8 @@ export class ProductsComponent implements OnInit {
       filteredp => (this.products = filteredp)
     );
     console.log(this.products);
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

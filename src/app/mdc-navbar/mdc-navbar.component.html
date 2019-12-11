@@ -13,7 +13,6 @@
     </mdc-top-app-bar-section>
     <mdc-top-app-bar-section align="end">
       <div *ngIf="appUser; else anon">
-        <span>{{ appUser.name }}</span>
         <button
           #demoAnchor
           mdcTopAppBarNavIcon
@@ -28,7 +27,14 @@
           [anchorElement]="demoAnchor"
           [anchorMargin]="{ top: 35 }"
         >
-          <mdc-list>
+          <mdc-list
+            ><div
+              style="    padding-left: 20px;
+              padding-right: 20px;"
+            >
+              <span>{{ appUser.name }}</span>
+            </div>
+            <mdc-list-divider></mdc-list-divider>
             <mdc-list-item routerLink="my-orders">My Orders</mdc-list-item>
             <ng-container *ngIf="appUser.isAdmin">
               <mdc-list-item routerLink="admin/orders"
