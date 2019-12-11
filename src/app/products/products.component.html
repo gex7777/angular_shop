@@ -4,49 +4,7 @@
       class=" mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop"
       *ngFor="let c of products"
     >
-      <div class="mdc-card my-card" *ngIf="c.title" [mdcElevation]="4">
-        <div
-          class="mdc-card__primary-action demo-card__primary-action"
-          tabindex="0"
-        >
-          <div
-            style="height:150px;
-          "
-          >
-            <img
-              class="mdc-card__media mdc-card__media--16-9 demo-card__media"
-              [src]="c.imageUrl"
-              alt=""
-              *ngIf="c.imageUrl"
-              style="height: 100%; width: 100%; object-fit:contain;"
-            />
-          </div>
-          <div class="demo-card__primary">
-            <h2
-              class="demo-card__title mdc-typography mdc-typography--headline6"
-            >
-              {{ c.title }}
-            </h2>
-            <h3
-              class="demo-card__subtitle mdc-typography mdc-typography--subtitle2"
-            >
-              {{ c.price | currency: "INR":"symbol" }}
-            </h3>
-            <button
-              mdc-fab
-              extended
-              fluid
-              style="    width: 100%;border-radius: 0px;"
-              icon="add_shopping_cart"
-              label="Add to cart"
-              class="blackFab"
-            ></button>
-          </div>
-          <div
-            class="demo-card__secondary mdc-typography mdc-typography--body2"
-          ></div>
-        </div>
-      </div>
+      <product-cart [product]="c"></product-cart>
     </div>
   </div>
 </div>

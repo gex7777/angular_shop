@@ -1,3 +1,4 @@
+import { ShoppingCartService } from "./shopping-cart.service";
 import { ProductShareService } from "./product-share.service";
 import { ProductService } from "./product.service";
 import { CategoryService } from "./category.service";
@@ -50,6 +51,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ProductFormComponent } from "./admin/product-form/product-form.component";
 import { NgPipesModule } from "ngx-pipes";
 import { FormsModule } from "@angular/forms";
+import { ProductCartComponent } from "./product-cart/product-cart.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,7 +65,8 @@ import { FormsModule } from "@angular/forms";
     AdminProductsComponent,
     AdminOrdersComponent,
     LoginComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    ProductCartComponent
   ],
   imports: [
     BrowserModule,
@@ -143,7 +146,8 @@ import { FormsModule } from "@angular/forms";
     AdminAuthGuardService,
     CategoryService,
     ProductService,
-    ProductShareService
+    ProductShareService,
+    ShoppingCartService
   ],
   bootstrap: [AppComponent]
 })
