@@ -21,6 +21,7 @@
       </h3>
       <div *ngIf="showActions">
         <button
+          *ngIf="getQuantity() === 0; else updateQuantity"
           (click)="addToCart(product)"
           mdc-fab
           extended
@@ -30,7 +31,31 @@
           label="Add to cart"
           class="blackFab"
         ></button>
-        <div>{{ getQuantity() }}</div>
+        <ng-template #updateQuantity>
+          <mat-grid-list cols="3" rowHeight="2:1">
+            <mat-grid-tile
+              ><button
+                mdc-fab
+                class="blackFab"
+                style="    width: 100%;border-radius: 0px;"
+                (click)="removeFromCart()"
+              >
+                -
+              </button></mat-grid-tile
+            >
+            <mat-grid-tile>{{ getQuantity() }}</mat-grid-tile>
+            <mat-grid-tile
+              ><button
+                mdc-fab
+                class="blackFab"
+                (click)="addToCart()"
+                style="    width: 100%;border-radius: 0px;"
+              >
+                +
+              </button></mat-grid-tile
+            >
+          </mat-grid-list>
+        </ng-template>
       </div>
     </div>
     <div
