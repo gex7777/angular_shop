@@ -10,14 +10,16 @@ import { Component, OnInit, Input } from "@angular/core";
 export class ProductCartComponent {
   @Input("product") product: Productsobj;
   @Input("showActions") showActions = true;
+  @Input("shopping-cart") shoppingCart;
   constructor(private cartService: ShoppingCartService) {}
 
   addToCart(product: Productsobj) {
-    let cartId = localStorage.getItem("cartId");
-    if (!cartId) {
-      this.cartService.create().then(result => {
-        localStorage.setItem("cartId", result.key);
-      });
-    }
+    this.cartService.addToCart(product);
+  }
+  getQuantity() {
+    if (!this.shoppingCart) return 0;
+    let item = this.shoppingCart.items[this.product.$key];
+
+    return item ? item.quantity : 0;
   }
 }

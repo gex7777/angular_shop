@@ -4,7 +4,7 @@
       class=" mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop"
       *ngFor="let c of products"
     >
-      <product-cart [product]="c"></product-cart>
+      <product-cart [product]="c" [shopping-cart]="cart"></product-cart>
     </div>
   </div>
 </div>

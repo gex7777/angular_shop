@@ -1,3 +1,4 @@
+import { ShoppingCartService } from "./../shopping-cart.service";
 import { ProductShareService } from "./../product-share.service";
 import { ProductService } from "./../product.service";
 import { Component, OnInit, OnDestroy } from "@angular/core";
@@ -13,9 +14,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
   products = [];
   category: any;
   subscription: any;
+  cart: unknown;
+  subscription2: any;
   constructor(
     private productService: ProductService,
     private productShare: ProductShareService,
+    private shoppingCartService: ShoppingCartService,
     route: ActivatedRoute
   ) {
     this.subscription = this.productService
@@ -30,13 +34,16 @@ export class ProductsComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.productShare.currentMessage.subscribe(
       filteredp => (this.products = filteredp)
     );
-    console.log(this.products);
+    this.subscription2 = (await this.shoppingCartService.getCart())
+      .valueChanges()
+      .subscribe(cart => (this.cart = cart));
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.subscription2.unsubscribe();
   }
 }

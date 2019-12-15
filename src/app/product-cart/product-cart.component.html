@@ -19,17 +19,19 @@
       <h3 class="demo-card__subtitle mdc-typography mdc-typography--subtitle2">
         {{ product.price | currency: "INR":"symbol" }}
       </h3>
-      <button
-        (click)="addToCart(product)"
-        *ngIf="showActions"
-        mdc-fab
-        extended
-        fluid
-        style="    width: 100%;border-radius: 0px;"
-        icon="add_shopping_cart"
-        label="Add to cart"
-        class="blackFab"
-      ></button>
+      <div *ngIf="showActions">
+        <button
+          (click)="addToCart(product)"
+          mdc-fab
+          extended
+          fluid
+          style="    width: 100%;border-radius: 0px;"
+          icon="add_shopping_cart"
+          label="Add to cart"
+          class="blackFab"
+        ></button>
+        <div>{{ getQuantity() }}</div>
+      </div>
     </div>
     <div
       class="demo-card__secondary mdc-typography mdc-typography--body2"
