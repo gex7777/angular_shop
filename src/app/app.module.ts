@@ -8,7 +8,9 @@ import {
   MatSelectModule,
   MatInputModule,
   MatGridListModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatBadgeModule,
+  MatIconModule
 } from "@angular/material";
 import { AdminAuthGuardService } from "./admin-auth-guard.service";
 import { UserService } from "./user.service";
@@ -137,7 +139,9 @@ import { ProductCartComponent } from "./product-cart/product-cart.component";
     MatPaginatorModule,
     FormsModule,
     CustomFormsModule,
-    MatGridListModule
+    MatGridListModule,
+    MatBadgeModule,
+    MatIconModule
   ],
   providers: [
     AuthService,

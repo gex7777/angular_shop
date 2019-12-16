@@ -1,3 +1,4 @@
+import { ShoppingCart } from "./../shared/shopping-cart";
 import { ShoppingCartService } from "./../shopping-cart.service";
 import { ProductShareService } from "./../product-share.service";
 import { ProductService } from "./../product.service";
@@ -16,6 +17,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   subscription: any;
   cart: unknown;
   subscription2: any;
+  shoppingCartItemCount: number;
   constructor(
     private productService: ProductService,
     private productShare: ProductShareService,
@@ -41,6 +43,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.subscription2 = (await this.shoppingCartService.getCart())
       .valueChanges()
       .subscribe(cart => (this.cart = cart));
+    let cart$ = await this.shoppingCartService.getCart();
+    cart$.valueChanges().subscribe((cart: ShoppingCart) => {
+      this.shoppingCartItemCount = 0;
+      for (let productId in cart.items)
+        this.shoppingCartItemCount += cart.items[productId].quantity;
+    });
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
